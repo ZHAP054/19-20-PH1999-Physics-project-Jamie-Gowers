@@ -29,21 +29,26 @@ deltradarray=makearray(3)
 deltvelarray=makearray(4)
 massarray=makearray(5)
 
-predvelarray=np.array([])
-index=0
+dark_mass_in_orbit_array=np.array([])
 for rad in radarray:
-  val=4.3e-06*massarray[index]
-  predvel=(val/rad)**0.5
-  predvelarray=np.append(predvelarray,predvel)
+  arcval=rad-np.arctan(rad/1.87)
+  mass_containd=4*np.pi*1.0e+08*3.4969*arcval
+  dark_mass_in_orbit_array=np.append(dark_mass_in_orbit_array,mass_containd)
+
+totalmassarray=np.array([])
+index=0
+for mass in massarray:
+  totalmassarray=np.append(totalmassarray,mass+dark_mass_in_orbit_array[index])
   index=index+1
 
-pyplot.plot(radarray,velarray,"ro",label="Atual data")
-pyplot.plot(radarray,predvelarray,"ro",label="predicted data")
+pyplot.plot(radarray,dark_mass_in_orbit_array,"ro",label="Dark matter")
+pyplot.plot(radarray,massarray,"ro",label="Regular matter")
+pyplot.plot(radarray,totalmassarray,"ro",label="Regular matter and dark matter")
 pyplot.xlabel("Star's orbital radius (kpc)")
-pyplot.ylabel("Star's rotational speed km/s")
+pyplot.ylabel("Mass within this orbit(10^11 solar masses)")
 pyplot.show()
-#The graph produced shows a distinct difference between the attual velocitys of the observed stars, and the predicted velocitys. In the attual velocity we see a steep increce initialy, wich is similar to the prediction. However the real velocites are much higher that our prediceted ones. Alothough the velocity in reality and the prediction starts to stay somewhat constent at the same time, the initially steeper increace with respect to radius means the real velocitys are consistantly higher that prediction line.
-Radius(kpc)	velocity(km/s)	∆Radius(kpc)	∆v(km/s)	Mass(solar masses)
+
+#For this section of the week 2 work, I decided to make a git repo for the added mass graphs, and make a seperate repo for the new estimation for the stars velocity. This way i won't have the same code twice in one repo.
 0.7329905	44.781902	0.05		4.1		1.23E+08
 1.1688017	59.18528	0.05		4.1		3.07E+08
 1.4849969	70.86315	0.05		4.1		4.97E+08
