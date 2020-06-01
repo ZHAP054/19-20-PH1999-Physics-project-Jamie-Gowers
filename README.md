@@ -41,14 +41,22 @@ for mass in massarray:
   totalmassarray=np.append(totalmassarray,mass+dark_mass_in_orbit_array[index])
   index=index+1
 
-pyplot.plot(radarray,dark_mass_in_orbit_array,"ro",label="Dark matter")
-pyplot.plot(radarray,massarray,"ro",label="Regular matter")
-pyplot.plot(radarray,totalmassarray,"ro",label="Regular matter and dark matter")
+predvelarray=np.array([])
+index=0
+for rad in radarray:
+  val=4.3e-06*totalmassarray[index]
+  predvel=(val/rad)**0.5
+  predvelarray=np.append(predvelarray,predvel)
+  index=index+1
+
+pyplot.plot(radarray,velarray,"ro",label="Real velocity")
+pyplot.plot(radarray,predvelarray,"ro",label="Predicted velocity")
 pyplot.xlabel("Star's orbital radius (kpc)")
-pyplot.ylabel("Mass within this orbit(10^11 solar masses)")
+pyplot.ylabel("Star's velocity(km/s)")
 pyplot.show()
 
-#For this section of the week 2 work, I decided to make a git repo for the added mass graphs, and make a seperate repo for the new estimation for the stars velocity. This way i won't have the same code twice in one repo.
+#One of the final tasks for week 2 was to plot my new predicted velocitys, and the real ones, against radius. This time the predicted vales where closer to the real ones. The velocitys that the stars had at larger radi where consistant with the real ones, and where only slightly to high at values of 7.5 kpc.
+#Something else i thought was interesting, was that in the graph of mater, dark matter, and total matter with respect to radius (this is in the preveous repo). I exepected all three graph's gradiants to decrece at a reasnobly constant rate, it would demonstrate that the denceity of matter and darkmatter decreces as a function of radius.This was the case with the reglar matter with respect to radius graph, however the darkmatter showed a lenier increce. This suggests that the darkmatter isn't effected by garvity, and is evenly distrebuted.
 0.7329905	44.781902	0.05		4.1		1.23E+08
 1.1688017	59.18528	0.05		4.1		3.07E+08
 1.4849969	70.86315	0.05		4.1		4.97E+08
