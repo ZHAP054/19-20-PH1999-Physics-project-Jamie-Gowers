@@ -55,12 +55,36 @@ def findbestfit(inputval):
     best_fit=np.sum(Xsquarray)
   return (best_fit)
 chiimon=10000
-for valofpo in np.arange(0.98e+08,1.21e+08, 0.01e+08):
+for valofpo in np.arange(0.72e+08,0.75e+08, 0.005e+08):
   newchi=findbestfit(valofpo)
   if newchi<chiimon:
-    bestpo=newchi
+    bestchi=newchi
+    bestpo=valofpo
     chiimon=newchi
-print(bestpo)
+
+dark_mass_in_orbit_array=np.array([])
+for rad in radarray:
+  arcval=rad-np.arctan(rad/1.87)
+  mass_containd=4*np.pi*bestpo*3.4969*arcval
+  dark_mass_in_orbit_array=np.append(dark_mass_in_orbit_array,mass_containd)
+totalmassarray=np.array([])
+index=0
+for mass in massarray:
+  totalmassarray=np.append(totalmassarray,mass+dark_mass_in_orbit_array[index])
+  index=index+1
+predvelarray=np.array([])
+index=0
+for rad in radarray:
+  val=4.3e-06*totalmassarray[index]
+  predvel=(val/rad)**0.5
+  predvelarray=np.append(predvelarray,predvel)
+  index=index+1
+
+pyplot.plot(radarray,velarray,"ro",label="Real velocity")
+pyplot.plot(radarray,predvelarray,"ro",label="Predicted velocity")
+pyplot.xlabel("Star's orbital radius (kpc)")
+pyplot.ylabel("Star's velocity(km/s)")
+pyplot.show()
 
 Radius(kpc)	velocity(km/s)	∆Radius(kpc)	∆v(km/s)	Mass(solar masses)
 0.7329905	44.781902	0.05		4.1		1.23E+08
