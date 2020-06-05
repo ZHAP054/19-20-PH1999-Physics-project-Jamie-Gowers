@@ -1,4 +1,4 @@
-# 19-20-PH1999-Physics-project-Jamie-Gowers
+# 19-20-PH1999-Physics-project-2002245
 Student ZHAP054 Foundation Individual Scientific Project
 import numpy as np
 import matplotlib.pyplot as pyplot
@@ -28,46 +28,11 @@ deltradarray=makearray(3)
 deltvelarray=makearray(4)
 massarray=makearray(5)
 
-def findbestfit(inputval):
-  dark_mass_in_orbit_array=np.array([])
-  for rad in radarray:
-    arcval=rad-np.arctan(rad/1.87)
-    mass_containd=4*np.pi*inputval*3.4969*arcval
-    dark_mass_in_orbit_array=np.append(dark_mass_in_orbit_array,mass_containd)
-  totalmassarray=np.array([])
-  index=0
-  for mass in massarray:
-    totalmassarray=np.append(totalmassarray,mass+dark_mass_in_orbit_array[index])
-    index=index+1
-  predvelarray=np.array([])
-  index=0
-  for rad in radarray:
-    val=4.3e-06*totalmassarray[index]
-    predvel=(val/rad)**0.5
-    predvelarray=np.append(predvelarray,predvel)
-    index=index+1
-  index=0
-  Xsquarray=np.array([])
-  for rad in radarray: 
-    val=(velarray[index]-predvelarray[index])**2
-    Xsquarray=np.append(Xsquarray,val/16.81)
-    index=index+1
-    best_fit=np.sum(Xsquarray)
-  return (best_fit)
-chiimon=10000
-for valofpo in np.arange(0.8e+08,1.1e+08,0.001e+08):
-  newchi=findbestfit(valofpo)
-  if newchi<chiimon:
-    bestchi=newchi
-    bestpo=valofpo
-    chiimon=newchi
-  if newchi<519.6457 and newchi>517.6457:
-    print(valofpo)
 
 dark_mass_in_orbit_array=np.array([])
 for rad in radarray:
   arcval=rad-np.arctan(rad/1.87)
-  mass_containd=4*np.pi*bestpo*3.4969*arcval
+  mass_containd=4*np.pi*0.89e+08*3.4969*arcval
   dark_mass_in_orbit_array=np.append(dark_mass_in_orbit_array,mass_containd)
 totalmassarray=np.array([])
 index=0
@@ -81,6 +46,12 @@ for rad in radarray:
   predvel=(val/rad)**0.5
   predvelarray=np.append(predvelarray,predvel)
   index=index+1
+
+pyplot.plot(radarray,velarray,"ro",label="Real velocity")
+pyplot.plot(radarray,predvelarray,"ro",label="Predicted velocity")
+pyplot.xlabel("Star's orbital radius (kpc)")
+pyplot.ylabel("Star's velocity(km/s)")
+pyplot.show()
 
 Radius(kpc)	velocity(km/s)	∆Radius(kpc)	∆v(km/s)	Mass(solar masses)
 0.7329905	44.781902	0.05		4.1		1.23E+08
