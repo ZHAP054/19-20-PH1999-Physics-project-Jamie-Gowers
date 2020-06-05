@@ -50,7 +50,7 @@ def findbestfit(inputval):
   Xsquarray=np.array([])
   for rad in radarray: 
     val=(velarray[index]-predvelarray[index])**2
-    Xsquarray=np.append(Xsquarray,val/0.1e+08)
+    Xsquarray=np.append(Xsquarray,val/16.81)
     index=index+1
     best_fit=np.sum(Xsquarray)
   return (best_fit)
@@ -61,6 +61,8 @@ for valofpo in np.arange(0.72e+08,0.75e+08, 0.005e+08):
     bestchi=newchi
     bestpo=valofpo
     chiimon=newchi
+print(bestpo)
+print(bestchi)
 
 dark_mass_in_orbit_array=np.array([])
 for rad in radarray:
