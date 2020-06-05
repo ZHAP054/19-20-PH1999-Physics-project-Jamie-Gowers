@@ -1,5 +1,6 @@
 # 19-20-PH1999-Physics-project-2002245
 Student ZHAP054 Foundation Individual Scientific Project
+
 import numpy as np
 import matplotlib.pyplot as pyplot
 
@@ -28,11 +29,10 @@ deltradarray=makearray(3)
 deltvelarray=makearray(4)
 massarray=makearray(5)
 
-
 dark_mass_in_orbit_array=np.array([])
 for rad in radarray:
   arcval=rad-np.arctan(rad/1.87)
-  mass_containd=4*np.pi*0.87e+08*3.4969*arcval
+  mass_containd=4*np.pi*0.88e+08*3.4969*arcval
   dark_mass_in_orbit_array=np.append(dark_mass_in_orbit_array,mass_containd)
 totalmassarray=np.array([])
 index=0
@@ -46,12 +46,7 @@ for rad in radarray:
   predvel=(val/rad)**0.5
   predvelarray=np.append(predvelarray,predvel)
   index=index+1
-
-pyplot.plot(radarray,velarray,"ro",label="Real velocity")
-pyplot.plot(radarray,predvelarray,"ro",label="Predicted velocity")
-pyplot.xlabel("Star's orbital radius (kpc)")
-pyplot.ylabel("Star's velocity(km/s)")
-pyplot.show()
+print(massarray[index-1]/dark_mass_in_orbit_array[index-1])
 
 Radius(kpc)	velocity(km/s)	∆Radius(kpc)	∆v(km/s)	Mass(solar masses)
 0.7329905	44.781902	0.05		4.1		1.23E+08
