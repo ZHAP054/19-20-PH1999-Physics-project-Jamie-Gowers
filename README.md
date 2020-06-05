@@ -55,14 +55,14 @@ def findbestfit(inputval):
     best_fit=np.sum(Xsquarray)
   return (best_fit)
 chiimon=10000
-for valofpo in np.arange(0.72e+08,0.75e+08, 0.005e+08):
+for valofpo in np.arange(0.8e+08,1.1e+08,0.001e+08):
   newchi=findbestfit(valofpo)
   if newchi<chiimon:
     bestchi=newchi
     bestpo=valofpo
     chiimon=newchi
-print(bestpo)
-print(bestchi)
+  if newchi<519.6457 and newchi>517.6457:
+    print(valofpo)
 
 dark_mass_in_orbit_array=np.array([])
 for rad in radarray:
@@ -81,12 +81,6 @@ for rad in radarray:
   predvel=(val/rad)**0.5
   predvelarray=np.append(predvelarray,predvel)
   index=index+1
-
-pyplot.plot(radarray,velarray,"ro",label="Real velocity")
-pyplot.plot(radarray,predvelarray,"ro",label="Predicted velocity")
-pyplot.xlabel("Star's orbital radius (kpc)")
-pyplot.ylabel("Star's velocity(km/s)")
-pyplot.show()
 
 Radius(kpc)	velocity(km/s)	∆Radius(kpc)	∆v(km/s)	Mass(solar masses)
 0.7329905	44.781902	0.05		4.1		1.23E+08
