@@ -1,9 +1,7 @@
 # 19-20-PH1999-Physics-project-2002245
 Student ZHAP054 Foundation Individual Scientific Project
-
 import numpy as np
 import matplotlib.pyplot as pyplot
-
 def makearray(selected):
   galaxy=open("galaxys.txt","r")
   array=np.array([])
@@ -28,25 +26,41 @@ velarray=makearray(2)
 deltradarray=makearray(3)
 deltvelarray=makearray(4)
 massarray=makearray(5)
+def findbestfit(inputval):
+  dark_mass_in_orbit_array=np.array([])
+  for rad in radarray:
+    arcval=rad-(1.87*np.arctan(rad/1.87))
+    mass_containd=4*np.pi*inputval*3.4969*arcval
+    dark_mass_in_orbit_array=np.append(dark_mass_in_orbit_array,mass_containd)
+  totalmassarray=np.array([])
+  index=0
+  for mass in massarray:
+    totalmassarray=np.append(totalmassarray,mass+dark_mass_in_orbit_array[index])
+    index=index+1
+  predvelarray=np.array([])
+  index=0
+  for rad in radarray:
+    val=4.3e-06*totalmassarray[index]
+    predvel=(val/rad)**0.5
+    predvelarray=np.append(predvelarray,predvel)
+    index=index+1
+  index=0
+  Xsquarray=np.array([])
+  for rad in radarray: 
+    val=(velarray[index]-predvelarray[index])**2
+    Xsquarray=np.append(Xsquarray,val/0.1e+08)
+    index=index+1
+    best_fit=np.sum(Xsquarray)
+  return (best_fit)
 
-dark_mass_in_orbit_array=np.array([])
-for rad in radarray:
-  arcval=rad-(1.87*np.arctan(rad/1.87))
-  mass_containd=4*np.pi*1e+08*3.4969*arcval
-  dark_mass_in_orbit_array=np.append(dark_mass_in_orbit_array,mass_containd)
-totalmassarray=np.array([])
-index=0
-for mass in massarray:
-  totalmassarray=np.append(totalmassarray,mass+dark_mass_in_orbit_array[index])
-  index=index+1
-predvelarray=np.array([])
-index=0
-for rad in radarray:
-  val=4.3e-06*totalmassarray[index]
-  predvel=(val/rad)**0.5
-  predvelarray=np.append(predvelarray,predvel)
-  index=index+1
-print(massarray[index-1]/dark_mass_in_orbit_array[index-1])
+chiimon=10000
+for valofpo in np.arange(1.064e+08,1.075e+08, 0.0001e+08):
+  newchi=findbestfit(valofpo)
+  if newchi<chiimon:
+    bestpo=valofpo
+    chiimon=newchi
+print(bestpo)
+print(chiimon)
 
 Radius(kpc)	velocity(km/s)	∆Radius(kpc)	∆v(km/s)	Mass(solar masses)
 0.7329905	44.781902	0.05		4.1		1.23E+08
