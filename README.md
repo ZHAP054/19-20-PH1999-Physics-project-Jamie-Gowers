@@ -54,13 +54,13 @@ def findbestfit(inputval):
   return (best_fit)
 
 chiimon=10000
-for valofpo in np.arange(1.064e+08,1.075e+08, 0.0001e+08):
+for valofpo in np.arange(1.060e+08,1.075e+08, 0.0001e+08):
   newchi=findbestfit(valofpo)
   if newchi<chiimon:
     bestpo=valofpo
     chiimon=newchi
-print(bestpo)
-print(chiimon)
+  if newchi<112.788 and newchi>110.788:
+    print(valofpo)
 
 Radius(kpc)	velocity(km/s)	∆Radius(kpc)	∆v(km/s)	Mass(solar masses)
 0.7329905	44.781902	0.05		4.1		1.23E+08
