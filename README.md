@@ -31,8 +31,8 @@ massarray=makearray(5)
 
 dark_mass_in_orbit_array=np.array([])
 for rad in radarray:
-  arcval=rad-np.arctan(rad/1.87)
-  mass_containd=4*np.pi*0.88e+08*3.4969*arcval
+  arcval=rad-(1.87*np.arctan(rad/1.87))
+  mass_containd=4*np.pi*1e+08*3.4969*arcval
   dark_mass_in_orbit_array=np.append(dark_mass_in_orbit_array,mass_containd)
 totalmassarray=np.array([])
 index=0
