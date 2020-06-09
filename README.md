@@ -48,7 +48,7 @@ def findbestfit(inputval):
   Xsquarray=np.array([])
   for rad in radarray: 
     val=(velarray[index]-predvelarray[index])**2
-    Xsquarray=np.append(Xsquarray,val/0.1e+08)
+    Xsquarray=np.append(Xsquarray,val/4.1)
     index=index+1
     best_fit=np.sum(Xsquarray)
   return (best_fit)
